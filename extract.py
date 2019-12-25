@@ -2,7 +2,6 @@ import json
 import os
 import requests
 from dotenv import load_dotenv
-from pandas.io.json import json_normalize
 
 
 SELECT_PARAMS = [
@@ -61,8 +60,8 @@ def headers():
 
 
 def download_data(url, headers):
-    data = requests.get(url=url, headers=headers).json()
-    return json_normalize(data['d']['results'])
+    data = requests.get(url=url, headers=headers)
+    return data
 
 
 def extract_projects():
@@ -72,4 +71,3 @@ def extract_projects():
 def extract_tasks():
     return download_data(tasks_url(), headers())
 
-print(extract_tasks())
